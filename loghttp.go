@@ -7,6 +7,7 @@ import (
 	"context"
 	"log"
 	"net/http"
+        "net/http/httputil"
 	"time"
 
 	"github.com/motemen/go-nuts/roundtime"
@@ -28,6 +29,12 @@ var DefaultTransport = &Transport{
 // Used if transport.LogRequest is not set.
 var DefaultLogRequest = func(req *http.Request) {
 	log.Printf("--> %s %s", req.Method, req.URL)
+//	dump, err := httputil.DumpRequest(req, true)
+//      if err != nil {
+//          log.Printf("--> Not able to dump request ")
+//          return
+//      }
+//      log.Printf("%q", dump)
 }
 
 // Used if transport.LogResponse is not set.
@@ -38,6 +45,12 @@ var DefaultLogResponse = func(resp *http.Response) {
 	} else {
 		log.Printf("<-- %d %s", resp.StatusCode, resp.Request.URL)
 	}
+//	dump, err := httputil.DumpResponse(resp, true)
+//        if err != nil {
+//            log.Printf("--> Not able to dump request ")
+//            return
+//        }
+//        log.Printf("Dump Response : %q", dump)
 }
 
 type contextKey struct {
